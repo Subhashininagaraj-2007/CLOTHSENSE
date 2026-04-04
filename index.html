@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClothSense AI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="page-shell">
+        <aside class="brand-panel">
+            <p class="eyebrow">Sustainable Fashion Assistant</p>
+            <h1>ClothSense AI</h1>
+            <p class="hero-copy">
+                Sign in, upload a garment photo, and get an instant condition prediction
+                with donation, upcycling, or recycling suggestions.
+            </p>
+            <div class="hero-points">
+                <p>Classifies into Good, Moderate, Bad, or Not Cloth</p>
+                <p>Provides next-step suggestions based on prediction</p>
+                <p>Includes donation and upcycling quick actions</p>
+            </div>
+        </aside>
+
+        <main class="content-panel">
+            <section id="loginView" class="card auth-card">
+                <div class="card-header">
+                    <p id="authSectionLabel" class="section-label">Login</p>
+                    <h2 id="authTitle">Welcome back</h2>
+                    <p id="authCopy" class="section-copy">Sign in with your ClothSense account to continue.</p>
+                </div>
+
+                <div class="auth-toggle" role="tablist" aria-label="Authentication options">
+                    <button id="loginTabButton" class="auth-tab active" type="button">Login</button>
+                    <button id="registerTabButton" class="auth-tab" type="button">Create Account</button>
+                </div>
+
+                <form id="loginForm" class="form-grid">
+                    <label class="input-group">
+                        <span>Email</span>
+                        <input id="emailInput" type="email" placeholder="you@example.com" required>
+                    </label>
+
+                    <label id="nameGroup" class="input-group" hidden>
+                        <span>Full Name</span>
+                        <input id="nameInput" type="text" placeholder="Enter your full name">
+                    </label>
+
+                    <label class="input-group">
+                        <span>Password</span>
+                        <input id="passwordInput" type="password" placeholder="Enter your password" required>
+                    </label>
+
+                    <label id="confirmPasswordGroup" class="input-group" hidden>
+                        <span>Confirm Password</span>
+                        <input id="confirmPasswordInput" type="password" placeholder="Confirm your password">
+                    </label>
+
+                    <button id="loginButton" class="primary-button" type="submit">Login</button>
+                </form>
+
+                <p id="loginMessage" class="helper-text"></p>
+            </section>
+
+            <section id="appView" class="card analyzer-card" hidden>
+                <div class="topbar">
+                    <div>
+                        <p class="section-label">Analyzer</p>
+                        <h2>Cloth Condition Checker</h2>
+                    </div>
+                    <button id="logoutButton" class="ghost-button" type="button">Logout</button>
+                </div>
+
+                <p id="status" class="status-banner">Loading model...</p>
+                <p id="environmentHint" class="environment-hint" hidden></p>
+
+                <div class="upload-panel">
+                    <label class="upload-box" for="imageUpload">
+                        <input type="file" id="imageUpload" accept="image/*" hidden>
+                        <span class="upload-title">Choose cloth image</span>
+                        <span class="upload-subtitle">PNG, JPG, or JPEG</span>
+                    </label>
+
+                    <div class="camera-actions">
+                        <button id="startCameraButton" class="ghost-button" type="button">Use Webcam</button>
+                        <button id="captureButton" class="ghost-button" type="button" hidden>Capture Photo</button>
+                        <button id="retakeButton" class="ghost-button" type="button" hidden>Retake</button>
+                    </div>
+
+                    <button id="analyzeButton" class="primary-button" type="button" disabled>Analyze Cloth</button>
+                </div>
+
+                <div class="preview-grid">
+                    <div class="preview-card">
+                        <p class="section-label">Preview</p>
+                        <video id="cameraPreview" autoplay playsinline hidden></video>
+                        <img id="previewImage" alt="Uploaded cloth preview" hidden>
+                        <canvas id="captureCanvas" hidden></canvas>
+                        <div id="previewPlaceholder" class="preview-placeholder">
+                            Upload an image or capture one using your webcam.
+                        </div>
+                    </div>
+
+                    <section id="resultCard" class="result-card" hidden>
+                        <p class="section-label">Prediction Result</p>
+                        <h3 id="result"></h3>
+                        <div class="suggestion-box">
+                            <p class="suggestion-label">Suggestion</p>
+                            <p id="suggestion" class="suggestion-text"></p>
+                            <p id="info" class="info-text"></p>
+                            <a id="actionButton" class="action-button" href="#" target="_blank" rel="noopener noreferrer" hidden></a>
+
+                            <div id="videoSection" class="video-section" hidden>
+                                <p class="suggestion-label">Upcycling Videos</p>
+                                <div id="videoLinks" class="video-links"></div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="app.js"></script>
+</body>
+</html>
